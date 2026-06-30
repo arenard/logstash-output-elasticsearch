@@ -1,3 +1,6 @@
+## 12.1.5
+  - Support Elastic Cloud API keys in the `api_key` option, and centralise `api_key` credential handling in the shared `logstash-mixin-elasticsearch_auth_support` gem
+
 ## 12.1.4
   - [Doc] Add note for index option [#1269](https://github.com/logstash-plugins/logstash-output-elasticsearch/pull/1269)
 

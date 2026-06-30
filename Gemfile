@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gemspec
 
+# Not yet published to RubyGems; resolve from the source repository.
+gem 'logstash-mixin-elasticsearch_auth_support', git: 'https://github.com/arenard/logstash-mixin-elasticsearch_auth_support.git'
+
 logstash_path = ENV["LOGSTASH_PATH"] || "../../logstash"
 use_logstash_source = ENV["LOGSTASH_SOURCE"] && ENV["LOGSTASH_SOURCE"].to_s == "1"
 

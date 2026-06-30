@@ -1,5 +1,6 @@
 require 'cgi'
 require "base64"
+require "logstash/plugin_mixins/elasticsearch_auth_support"
 
 module LogStash; module Outputs; class ElasticSearch;
   module HttpClientBuilder
@@ -186,13 +187,8 @@ module LogStash; module Outputs; class ElasticSearch;
     end
 
     def self.setup_api_key(logger, params)
-      api_key = params["api_key"]
-
-      return {} unless (api_key&.value)
-
-      value = is_base64?(api_key.value) ?  api_key.value : Base64.strict_encode64(api_key.value)
-
-      { "Authorization" => "ApiKey #{value}" }
+      header = LogStash::PluginMixins::ElasticsearchAuthSupport.api_key_auth_header(params["api_key"], logger: logger)
+      header ? { "Authorization" => header } : {}
     end
 
     class << self
@@ -210,14 +206,6 @@ module LogStash; module Outputs; class ElasticSearch;
 
       def query_param_separator(url)
         url.match?(/\?[^\s#]+/) ? '&' : '?'
-      end
-
-      def is_base64?(string)
-        begin
-          string == Base64.strict_encode64(Base64.strict_decode64(string))
-        rescue ArgumentError
-          false
-        end
       end
     end
   end

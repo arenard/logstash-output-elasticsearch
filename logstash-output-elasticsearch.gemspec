@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'logstash-mixin-deprecation_logger_support', '~>1.0'
   s.add_runtime_dependency 'logstash-mixin-ca_trusted_fingerprint_support', '~>1.0'
   s.add_runtime_dependency 'logstash-mixin-normalize_config_support', '~>1.0'
+  s.add_runtime_dependency 'logstash-mixin-elasticsearch_auth_support', '~> 0.1'
 
   s.add_development_dependency 'logstash-codec-plain'
   s.add_development_dependency 'logstash-devutils'
